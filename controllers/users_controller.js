@@ -1,24 +1,41 @@
 const User = require('../models/user');
 
-module.exports.profile = async function (req, res) {
-    try {
-      const user = await User.findById(req.params.id).exec();
+// module.exports.profile = async function (req, res) {
+//     try {
+//       const user = await User.findById(req.params.id).exec();
   
-      return res.render("user_profile", {
-        title: "User Profile",
-        profile_user: user,
-      });
-    } catch (err) {
-      console.error(err);
-      return res.redirect("back");
-    }
-  };
+//       return res.render("user_profile", {
+//         title: "User Profile",
+//         profile_user: user,
+//       });
+//     } catch (err) {
+//       console.error(err);
+//       return res.redirect("back");
+//     }
+//   };
 
-// module.exports.profile = function(req, res){
-//     return res.render('user_profile',{
-//         title : 'User profile'
-//     });
-// }
+module.exports.profile = function(req, res){
+
+    User.findById(req.params.id , function(err, user){
+      return res.render('user_profile',{
+        title : 'User profile',
+        profile_user : user
+    });
+  });
+
+    
+}
+
+module.exports.update = function(req, res){
+  if(req.user.id == req.params.id){
+    User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+      return res.redirect('back');
+    });
+  }
+  else{
+    return res.status(401).send('Unauthorized');
+  }
+}
 
 
 
