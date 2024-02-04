@@ -29,7 +29,7 @@
         return $(`<li id="post-${post._id }">
         <p>
             <small>
-                <a class="delete-post-button"  href="/posts/destroy/${ post._id }">X</a>
+                <a class="delete-post-buttton" href="/posts/destroy/${ post._id }">X</a>
             </small>
            
             ${ post.content }

@@ -22,12 +22,15 @@ app.use(sassMiddleware({
 }));
 
 app.use(express.urlencoded());
-app.use(expressLayouts);
+
 
 
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use(expressLayouts);
+
 //extracting styles and scripts into the layouts
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
